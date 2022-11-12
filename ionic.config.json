@@ -1,0 +1,7 @@
+{
+  "name": "Safety Guardian",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
