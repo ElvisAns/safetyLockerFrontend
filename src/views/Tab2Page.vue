@@ -2,7 +2,12 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 2</ion-title>
+        <ion-title>Dashboard</ion-title>
+        <ion-buttons slot="end">
+          <ion-button>
+            <img :src="require('/public/assets/icon/favicon.png')" style="height:32px;">
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
