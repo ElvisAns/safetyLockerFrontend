@@ -3,20 +3,19 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Dashboard</ion-title>
-        <ion-buttons slot="end">
+        <!--ion-buttons slot="end">
           <ion-button>
             <img :src="require('/public/assets/icon/favicon.png')" style="height:32px;">
           </ion-button>
-        </ion-buttons>
+        </ion-buttons-->
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
+          <ion-title size="large">Dashboard</ion-title>
         </ion-toolbar>
       </ion-header>
-      
       <ExploreContainer name="Tab 2 page" />
     </ion-content>
   </ion-page>
