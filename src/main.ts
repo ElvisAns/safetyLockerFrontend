@@ -24,6 +24,7 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 const pinia  = createPinia()
 
+
 const app = createApp(App)
   .use(IonicVue,{mode:'ios'})
   .use(pinia)
