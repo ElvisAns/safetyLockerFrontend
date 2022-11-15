@@ -3,14 +3,14 @@
       <img :src="require('/public/assets/icon/icon.png')">
       <strong>Always make sure you start working being safer</strong>
 
-      <ion-list  v-if="loaded">
+      <ion-list  v-if="loaded" style="min-width:70vw;">
         <ion-list-header>
-          <ion-label><span :style="{fontSize:'15px'}"><ion-icon :name="listCircle"></ion-icon>Manage Lines state here</span></ion-label>
+          <ion-label :style="{fontSize:'15px'}"><ion-icon :icon="settings"></ion-icon> Manage Lines state here</ion-label>
         </ion-list-header>
         <div v-for="(item,index) in lines" :key="index" class="list-container">
-          <ion-item :class="{odd_item:index%2&&true}">
+          <ion-item :class="{odd_item:index%2}">
             <ion-label>{{item.line_name}}</ion-label>
-            <ion-toggle color="success" slot="end" :id="item.id"  @click="remoteChangePinState" :checked="item.state==1?true:false" :enable-on-off-labels="true"></ion-toggle>
+            <ion-toggle color="secondary" slot="end" :id="item.id"  @click="remoteChangePinState" :checked="item.state==1?true:false" :enable-on-off-labels="true"></ion-toggle>
           </ion-item>
         </div>
       </ion-list>
@@ -36,8 +36,8 @@
   </template>
   
   <script lang="js">
-  import { IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail,IonCheckbox,IonToggle} from '@ionic/vue';
-  import {} from 'ionicons/icons';
+  import { IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail,IonCheckbox,IonToggle,alertController } from '@ionic/vue';
+  import {listCircle,settings} from 'ionicons/icons';
   import { defineComponent,ref} from 'vue';
   import axios from 'axios';
   
@@ -52,7 +52,9 @@
         const setLoaded = (state) => loaded.value = state;
         return {
           loaded,
-          setLoaded
+          setLoaded,
+          listCircle,
+          settings
         }
     },
     data(){
@@ -93,6 +95,17 @@
         const value = event.target.checked?false:true;//checked return false so we have to inverse
         const id = event.target.id;
         const {base_url} = this.backend;
+        
+        const presentAlert = async message => {
+          const alert = await alertController.create({
+            header: 'Notification',
+            subHeader: 'Important feedback',
+            message: message,
+            buttons: ['OK'],
+          });
+          await alert.present();
+        };
+
         axios.post(`${base_url}api/lines/state/set/${id}`,
         {
           "security_code":"R5YJS", //next time ask this
@@ -101,8 +114,11 @@
           "telephone":"+243971774990"
         }
         ).then(function process(res){
+          if("error" in res.data){
+            event.target.checked = !value; //as there's an error, reset the state in the initial state
+          }
           console.log(res.data);
-          alert(res.data.message)
+          presentAlert(res.data.message)
         })
       }
     }
