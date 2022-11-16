@@ -102,13 +102,15 @@ export default defineComponent({
     },5000);
   },
   beforeMount(){
-    const {base_url} = this.backend;
-    axios.get(`${base_url}api/lines/logs/list`).then((res)=>{
-      this.logs = res.data.data;
-    })
-    axios.get(`${base_url}api/current_status`).then((res)=>{
-      this.system_status = res.data.message;
-    })
+    setTimeout(()=>{
+      const {base_url} = this.backend;
+      axios.get(`${base_url}api/lines/logs/list`).then((res)=>{
+        this.logs = res.data.data;
+      })
+      axios.get(`${base_url}api/current_status`).then((res)=>{
+        this.system_status = res.data.message;
+      })
+    },4000);
   },
   methods:{
     get_item_data(message,what){
