@@ -12,27 +12,27 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-item>
-        <ion-label position="floating" color="secondary">Your name</ion-label>
+        <ion-label position="floating" style="font-weight:bold;">Your name</ion-label>
         <ion-input placeholder="Enter text" v-model="username"></ion-input>
     </ion-item>
 
     
     <ion-item>
-        <ion-label position="floating" color="secondary">Your telephone number</ion-label>
+        <ion-label position="floating" style="font-weight:bold;">Your telephone number</ion-label>
         <ion-input placeholder="Enter text" type="tel" v-model="telephone"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label position="floating" color="secondary">The current locking pin</ion-label>
+        <ion-label position="floating" style="font-weight:bold;">The current locking pin</ion-label>
         <ion-input placeholder="Enter text"  v-model="lockingPin"></ion-input>
     </ion-item>
 
     <ion-item style="margin-top:20px;">
-        <ion-label color="secondary">Want to put system to maintance?</ion-label>
+        <ion-label color="secondary"  style="font-weight:bold;">Want to put system to maintance?</ion-label>
         <ion-toggle color="secondary" slot="end" id="maintanceMode" v-model="stateMaintance" :enable-on-off-labels="true"></ion-toggle>
     </ion-item>
 
-    <ion-button @click="request_new_pass" color="primary" shape="round" fill="outline" size="small" style="position:relative;top:60px; left:20px;">Lost the last locking pin?</ion-button>
+    <ion-button @click="request_new_pass"  color="secondary" shape="round" fill="outline" size="small" style="position:relative;top:60px; left:20px; font-weight: bolder;">Lost the last locking pin?</ion-button>
   </ion-content>
 </template>
 
