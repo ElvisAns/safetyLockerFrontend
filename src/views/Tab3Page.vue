@@ -17,7 +17,7 @@
         </ion-toolbar>
       </ion-header>
       
-      <ExploreContainer name="Tab 3 page" />
+      <SettingContainer name="Settings" />
     </ion-content>
   </ion-page>
 </template>
@@ -25,10 +25,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import SettingContainer from '@/components/SettingContainer.vue';
 
 export default defineComponent({
   name: 'Tab3Page',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { SettingContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
 });
 </script>

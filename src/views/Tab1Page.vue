@@ -17,7 +17,7 @@
         </ion-toolbar>
       </ion-header>
     
-      <ActionContainer name="Tab 1 page" />
+      <ActionContainer name="Actions" />
     </ion-content>
   </ion-page>
 </template>
