@@ -67,6 +67,9 @@
     },
     setup() {
         const userStore = useUserStore();
+        let username = userStore.current_user_name;
+        let telephone = userStore.current_phone;
+        let lockingPin = userStore.get_current_saved_pin 
         const loaded = ref(false);
         const setLoaded = (state) => loaded.value = state;
         return {
@@ -74,7 +77,10 @@
           setLoaded,
           listCircle,
           settings,
-          userStore
+          userStore,
+          username,
+          lockingPin,
+          telephone,
         }
     },
     data(){
@@ -140,12 +146,18 @@
           await alert.present();
         };
 
+        
+        const userStore = useUserStore();
+        const username = userStore.current_user_name;
+        const telephone = userStore.current_phone;
+        const lockingPin = userStore.get_current_saved_pin 
+
         axios.post(`${base_url}api/lines/state/set/${id}`,
         {
-          "security_code":this.userStore.get_current_saved_pin, //next time ask this from pinia, and if no state, trigger a popup to ask the user input datas then save
+          "security_code":lockingPin, //next time ask this from pinia, and if no state, trigger a popup to ask the user input datas then save
           "state":value,
-          "name" : this.userStore.current_username,
-          "telephone": this.userStore.current_phone
+          "name" : username,
+          "telephone": telephone
         }
         ).then(function process(res){
           if("error" in res.data){
