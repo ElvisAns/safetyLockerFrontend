@@ -46,7 +46,7 @@
   
   <script lang="js">
   import { IonAvatar,IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail} from '@ionic/vue';
-  import { alertCircleOutline, reloadCircle, cog} from 'ionicons/icons';
+  import { cog } from 'ionicons/icons';
   import { defineComponent,ref} from 'vue';
   import axios from 'axios';
   import { useUserStore } from '@/stores/UserStore';
@@ -68,7 +68,8 @@
           setLoaded,
           userStore,
           telephone,
-          username
+          username,
+          cog
         }
     },
     data(){
