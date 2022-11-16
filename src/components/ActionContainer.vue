@@ -2,7 +2,7 @@
     <div id="container">
       <img :src="require('/public/assets/icon/icon.png')">
       <strong>Always make sure you start working being safer</strong>
-      <ion-button expand="block" @click="openModal">Change system status</ion-button>
+      <ion-button expand="block" @click="openModal" size="small" color="secondary">Change system status</ion-button>
       <ion-list  v-if="loaded" style="min-width:70vw;">
         <ion-list-header>
           <ion-label :style="{fontSize:'15px'}"><ion-icon :icon="settings"></ion-icon> Manage Lines state here</ion-label>
@@ -55,7 +55,7 @@
   import {listCircle,settings} from 'ionicons/icons';
   import { defineComponent,ref} from 'vue';
   import { useUserStore } from '../stores/UserStore';
-  import ModalPage from './Modal.vue';
+  import ModalPage from './ModalContainer.vue';
 
   import axios from 'axios';
   

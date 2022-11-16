@@ -8,7 +8,7 @@
     </ion-item>
     <ion-list  v-if="loaded">
       <ion-list-header>
-        <ion-label><span :style="{fontSize:'15px'}"><ion-icon :name="listCircle"></ion-icon>Activities</span></ion-label>
+        <ion-label><span :style="{fontSize:'15px'}">Activities</span></ion-label>
       </ion-list-header>
       <div v-for="(item,index) in logs" :key="index" class="list-container">
         <ion-item :class="{odd_item:index%2&&true}">
