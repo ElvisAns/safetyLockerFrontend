@@ -91,9 +91,9 @@ export default defineComponent({
     setInterval(()=>{
       const {base_url} = this.backend;
       axios.get(`${base_url}api/lines/logs/list`).then((res)=>{
-        const len = res.data.data;
-        if(len.length !== this.logs.length){
-          this.logs = res.data.data.reverse();
+        const response = res.data.data;
+        if(JSON.stringify(response) !== JSON.stringify(this.logs)){
+          this.logs = res.data.data;
         }
       })
       axios.get(`${base_url}api/current_status`).then((res)=>{
@@ -104,7 +104,7 @@ export default defineComponent({
   beforeMount(){
     const {base_url} = this.backend;
     axios.get(`${base_url}api/lines/logs/list`).then((res)=>{
-      this.logs = res.data.data.reverse();
+      this.logs = res.data.data;
     })
     axios.get(`${base_url}api/current_status`).then((res)=>{
       this.system_status = res.data.message;
