@@ -2,7 +2,7 @@
     <div id="container">
       <img :src="require('/public/assets/icon/icon.png')">
       <strong>Always make sure you start working being safer</strong>
-
+      <ion-button expand="block" @click="openModal">Change system status</ion-button>
       <ion-list  v-if="loaded" style="min-width:70vw;">
         <ion-list-header>
           <ion-label :style="{fontSize:'15px'}"><ion-icon :icon="settings"></ion-icon> Manage Lines state here</ion-label>
@@ -36,25 +36,45 @@
   </template>
   
   <script lang="js">
-  import { IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail,IonCheckbox,IonToggle,alertController } from '@ionic/vue';
+  import { 
+    IonList,
+    IonIcon,
+    IonLabel,
+    IonItem,
+    IonListHeader,
+    IonBadge,
+    IonButton,
+    IonSkeletonText,
+    IonThumbnail,
+    IonCheckbox,
+    IonToggle,
+    alertController,
+    modalController
+  } from '@ionic/vue';
+
   import {listCircle,settings} from 'ionicons/icons';
   import { defineComponent,ref} from 'vue';
+  import { useUserStore } from '../stores/UserStore';
+  import ModalPage from './Modal.vue';
+
   import axios from 'axios';
   
   export default defineComponent({
     name: 'ExploreContainer',
-    components : IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail,IonCheckbox,IonToggle,
+    components : modalController,IonList,IonIcon,IonLabel,IonItem,IonListHeader,IonBadge,IonButton,IonSkeletonText,IonThumbnail,IonCheckbox,IonToggle,
     props: {
       name: String
     },
     setup() {
+        const userStore = useUserStore();
         const loaded = ref(false);
         const setLoaded = (state) => loaded.value = state;
         return {
           loaded,
           setLoaded,
           listCircle,
-          settings
+          settings,
+          userStore
         }
     },
     data(){
@@ -91,6 +111,20 @@
       })
     },
     methods:{
+      
+      async openModal() {
+        const modal = await modalController.create({
+          component: ModalPage,
+        });
+        modal.present();
+
+        const { data, role } = await modal.onWillDismiss();
+
+        if (role === 'confirm') {
+          this.message = `Hello, ${data}!`;
+        }
+      },
+
       remoteChangePinState(event){
         const value = event.target.checked?false:true;//checked return false so we have to inverse
         const id = event.target.id;
@@ -101,17 +135,17 @@
             header: 'Notification',
             subHeader: 'Important feedback',
             message: message,
-            buttons: ['OK'],
+            buttons: ['Got it!'],
           });
           await alert.present();
         };
 
         axios.post(`${base_url}api/lines/state/set/${id}`,
         {
-          "security_code":"R5YJS", //next time ask this
+          "security_code":this.userStore.get_current_saved_pin, //next time ask this from pinia, and if no state, trigger a popup to ask the user input datas then save
           "state":value,
-          "name" : "Elvis ANSIMA",
-          "telephone":"+243971774990"
+          "name" : this.userStore.current_username,
+          "telephone": this.userStore.current_phone
         }
         ).then(function process(res){
           if("error" in res.data){
