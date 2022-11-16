@@ -99,7 +99,7 @@ export default defineComponent({
       axios.get(`${base_url}api/current_status`).then((res)=>{
         this.system_status = res.data.message!==this.system_status?res.data.message:this.system_status;
       })
-    },5000);
+    },30000);
   },
   beforeMount(){
     setTimeout(()=>{
