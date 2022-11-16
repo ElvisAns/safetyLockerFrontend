@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    
     <ion-header>
       <ion-toolbar>
         <ion-title>Action</ion-title>
