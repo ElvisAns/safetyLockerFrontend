@@ -1,6 +1,9 @@
 <template>
   <ion-app>
-    <div v-show="displaySplash" :class="animateClass" class="animate__animated splash"><img :src="require('/public/assets/icon/icon.png')"></div>
+    <div v-show="displaySplash" :class="animateClass" class="animate__animated splash">
+      <p style="color:white; font-size: 13px; font-weight: bolder;">SAFETY LOCKER</p>
+      <img :src="require('/public/assets/icon/icon.png')">
+    </div>
     <ion-router-outlet />
   </ion-app>
 </template>
